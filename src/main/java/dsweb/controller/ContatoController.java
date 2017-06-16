@@ -21,7 +21,7 @@ import dsweb.model.Contato;
 public class ContatoController {
 
 	@Autowired
-	@Qualifier("contatoMapDao")
+	@Qualifier("contatoJpaDao") // opções: contatoMapDao, contatoJdbcDao, contatoJpaDao
 	private ContatoDao contatoDao;
 	
 	@RequestMapping("/")
