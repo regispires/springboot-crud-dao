@@ -18,7 +18,7 @@
 		<p>${msg}</p>
 		</div>
 	</c:if>
-	<a href="/insere_contato_form" class="btn btn-primary">Novo contato</a>
+	<a href="/contatos/add" class="btn btn-primary">Novo contato</a>
 	<c:if test="${not empty contatos}">
 	<table id="tabela_contatos" class="table table-hover">
 		<thead>
@@ -27,8 +27,8 @@
 		<tbody>
 		<c:forEach var="c" items="${contatos}">
 			<tr><td>${c.nome}</td><td>${c.email}</td><td>${c.endereco}</td>
-			<td><a href="${url_base}altera_contato_form/${c.id}" class="btn btn-primary">Altera</a></td>
-			<td><a href="${url_base}delete_contato/${c.id}" class="btn btn-danger" onclick="return confirm('Confirma remoção?')" >Deleta</a></td>
+			<td><a href="${url_base}contatos/${c.id}/update" class="btn btn-primary">Altera</a></td>
+			<td><a href="${url_base}contatos/${c.id}/delete" class="btn btn-danger" onclick="return confirm('Confirma remoção?')" >Deleta</a></td>
 			</tr>
 		</c:forEach>
 		</tbody>
