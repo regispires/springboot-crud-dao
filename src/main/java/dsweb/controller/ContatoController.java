@@ -12,7 +12,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import dsweb.dao.ContatoDao;
@@ -44,7 +43,7 @@ public class ContatoController {
 		return "insere_contato";
 	}
 	
-	@RequestMapping("/contatos/{id}/update")
+	@GetMapping("/contatos/{id}/update")
 	public String alteraForm(@PathVariable Integer id, Model model) {
 		System.out.println("id: " + id);
 		Contato c = contatoDao.getContato(id);
@@ -60,16 +59,15 @@ public class ContatoController {
 		
 		if(result.hasErrors()) {
 			model.addAttribute("contato", contato);
-			if (contato == null) {
-				model.addAttribute("acao", "/contatos/add");
+			model.addAttribute("acao", "/contatos");
+			if (contato.getId() == null) {
 				return "insere_contato";
 			} else {
-				model.addAttribute("acao", "/contatos/" + contato.getId() + "/update");
 				return "altera_contato";
 			}
 		}
 		
-		if (contato == null) {
+		if (contato.getId() == null) {
 			contatoDao.adiciona(contato);
 			redirectAttributes.addFlashAttribute("msg", "Contato inserido com sucesso.");
 		} else {
@@ -79,7 +77,7 @@ public class ContatoController {
 		return "redirect:/contatos";
 	}
 
-	@RequestMapping("/contatos/{id}/delete")
+	@GetMapping("/contatos/{id}/delete")
 	public String deleteContato(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
 		System.out.println("id: " + id);
 		Contato contato = new Contato(id);
