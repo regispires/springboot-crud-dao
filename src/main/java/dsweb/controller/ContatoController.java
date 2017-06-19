@@ -39,7 +39,6 @@ public class ContatoController {
 	@GetMapping("/contatos/add")
 	public String insereForm(Model model) {
 		model.addAttribute("contato", new Contato());
-		model.addAttribute("acao", "/contatos");
 		return "insere_contato";
 	}
 	
@@ -49,7 +48,6 @@ public class ContatoController {
 		Contato c = contatoDao.getContato(id);
 		System.out.println("contato: " + c);
 		model.addAttribute("contato", c);
-		model.addAttribute("acao", "/contatos");
 		return "altera_contato";
 	}
 
@@ -59,7 +57,6 @@ public class ContatoController {
 		
 		if(result.hasErrors()) {
 			model.addAttribute("contato", contato);
-			model.addAttribute("acao", "/contatos");
 			if (contato.getId() == null) {
 				return "insere_contato";
 			} else {
